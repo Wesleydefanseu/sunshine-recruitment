@@ -63,8 +63,8 @@ export async function POST(request) {
     // Envoi de l'email au recruteur
     try {
       await resend.emails.send({
-        from: 'recrutement@sunshinebeauty.com', // Changez ceci avec votre domaine vérifié
-        to: 'votre-email@example.com', // Email du recruteur
+        from: 'onboarding@resend.dev ', // Changez ceci avec votre domaine vérifié
+        to: 'spasunshine7@gmail.com ', // Email du recruteur
         subject: `Nouvelle candidature : ${poste} - ${prenom} ${nom}`,
         html: `
           <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #f5f5f5;">
@@ -146,7 +146,7 @@ export async function POST(request) {
     // Email de confirmation au candidat
     try {
       await resend.emails.send({
-        from: 'recrutement@sunshinebeauty.com',
+        from: 'onboarding@resend.dev',
         to: email,
         subject: 'Confirmation de réception de votre candidature - Sunshine Beauty & Spa',
         html: `
