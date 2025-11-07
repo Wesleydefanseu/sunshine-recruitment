@@ -1,21 +1,7 @@
-import { createPool } from '@vercel/postgres';
+import { sql } from '@vercel/postgres';
 import { put } from '@vercel/blob';
 import { Resend } from 'resend';
 import { NextResponse } from 'next/server';
-
-// Créer la connexion avec fallback sur DATABASE_URL
-const connectionString = process.env.POSTGRES_URL || process.env.DATABASE_URL;
-
-if (!connectionString) {
-  console.error('AUCUNE VARIABLE DE CONNEXION TROUVÉE !');
-  console.error('Variables disponibles:', Object.keys(process.env).filter(k => k.includes('POSTGRES') || k.includes('DATABASE')));
-}
-
-const pool = createPool({
-  connectionString: connectionString,
-});
-
-const sql = pool.sql;
 
 // Initialiser Resend seulement si la clé existe
 let resend = null;
@@ -96,10 +82,10 @@ export async function POST(request) {
     if (resend) {
       // Email au recruteur
       try {
-        console.log(' Envoi email recruteur...');
-        await resend.emails.send({
-          from: 'onboarding@resend.dev',
-          to: 'wesleydefanseu@gmail.com', // CHANGEZ CECI !
+        console.log('Envoi email recruteur...');
+        const emailResult = await resend.emails.send({
+          from: 'onboarding@resend.dev', // Changez par votre domaine si vérifié
+          to: 'spasunshine7@gmail.com ', // ⚠️ CHANGEZ CECI !
           subject: `Nouvelle candidature : ${poste} - ${prenom} ${nom}`,
           html: `
             <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #f5f5f5;">
@@ -109,7 +95,7 @@ export async function POST(request) {
               
               <div style="padding: 40px; background: white;">
                 <h2 style="color: #d4af37; border-bottom: 3px solid #d4af37; padding-bottom: 10px; margin-bottom: 25px;">
-                  Informations du Candidat
+                   Informations du Candidat
                 </h2>
                 
                 <table style="width: 100%; border-collapse: collapse;">
@@ -172,9 +158,10 @@ export async function POST(request) {
             </div>
           `,
         });
-        console.log('Email recruteur envoyé');
+        console.log('Email recruteur envoyé, ID:', emailResult.id);
       } catch (error) {
         console.error('Erreur envoi email recruteur:', error.message);
+        console.error('Détails complets:', JSON.stringify(error, null, 2));
         // On continue même si l'email échoue
       }
 
@@ -188,7 +175,7 @@ export async function POST(request) {
           html: `
             <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #f5f5f5;">
               <div style="background: linear-gradient(135deg, #d4af37, #f4e04d); padding: 40px; text-align: center;">
-                <h1 style="color: #000; margin: 0; font-size: 36px;">✨ Merci ${prenom} !</h1>
+                <h1 style="color: #000; margin: 0; font-size: 36px;">Merci ${prenom} !</h1>
               </div>
               
               <div style="padding: 40px; background: white;">
@@ -223,15 +210,18 @@ export async function POST(request) {
             </div>
           `,
         });
-        console.log('✅ Email candidat envoyé');
+        console.log('Email candidat envoyé avec succès ! ID:', emailResult2.id);
       } catch (error) {
-        console.error('⚠️ Erreur envoi email candidat:', error.message);
+        console.error('Erreur envoi email candidat:', error);
+        console.error('Code erreur:', error.statusCode);
+        console.error('Message:', error.message);
       }
     } else {
-      console.log('⚠️ Resend non configuré, emails non envoyés');
+      console.log('Resend NON configuré - Variable RESEND_API_KEY manquante !');
+      console.log('Les emails ne seront pas envoyés.');
     }
 
-    console.log('🎉 Traitement terminé avec succès');
+    console.log('Traitement terminé avec succès');
     return NextResponse.json({ 
       success: true,
       message: 'Candidature envoyée avec succès' 

@@ -61,14 +61,12 @@ export default function RecruitmentForm() {
           message: 'Votre candidature a été envoyée avec succès ! Nous vous recontacterons bientôt.' 
         });
         
-        // Réinitialiser le formulaire
         setFormData({
           nom: '', prenom: '', email: '', telephone: '',
           poste: '', ville: '', quartier: '', message: ''
         });
         setCvFile(null);
         
-        // Réinitialiser l'input file
         const fileInput = document.getElementById('cv-upload');
         if (fileInput) fileInput.value = '';
       } else {
@@ -90,198 +88,190 @@ export default function RecruitmentForm() {
   return (
     <div style={{
       minHeight: '100vh',
-      background: 'linear-gradient(135deg, #000000 0%, #1a1a1a 100%)',
-      padding: '40px 20px'
+      background: 'linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%)',
+      padding: '60px 20px',
+      fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
     }}>
-      <div style={{ maxWidth: '900px', margin: '0 auto' }}>
+      <div style={{ maxWidth: '800px', margin: '0 auto' }}>
+        
         {/* Header */}
-        <div style={{ textAlign: 'center', marginBottom: '60px' }}>
-          <div style={{
-            width: '120px',
-            height: '120px',
-            margin: '0 auto 30px',
-            background: 'linear-gradient(135deg, #d4af37, #f4e04d, #d4af37)',
-            borderRadius: '50%',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            fontSize: '60px',
-            fontWeight: 'bold',
-            color: '#000',
-            boxShadow: '0 20px 60px rgba(212, 175, 55, 0.4)'
-          }}>
-            S
-          </div>
+        <div style={{ textAlign: 'center', marginBottom: '70px' }}>
           <h1 style={{
-            fontSize: '48px',
-            background: 'linear-gradient(135deg, #d4af37, #f4e04d)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            backgroundClip: 'text',
+            fontSize: '42px',
+            color: '#c9a961',
             marginBottom: '15px',
-            fontWeight: 'bold'
+            fontWeight: '300',
+            letterSpacing: '3px',
+            textTransform: 'uppercase'
           }}>
-            Rejoignez l'équipe
+            Rejoignez Notre Équipe
           </h1>
           <h2 style={{
-            fontSize: '36px',
+            fontSize: '28px',
             color: '#fff',
-            marginBottom: '20px'
+            marginBottom: '20px',
+            fontWeight: '400'
           }}>
             Sunshine Beauty & Spa
           </h2>
+          <div style={{
+            width: '60px',
+            height: '2px',
+            background: 'linear-gradient(90deg, transparent, #c9a961, transparent)',
+            margin: '30px auto'
+          }} />
           <p style={{
-            color: '#999',
-            fontSize: '18px'
+            color: '#888',
+            fontSize: '16px',
+            maxWidth: '500px',
+            margin: '0 auto',
+            lineHeight: '1.6'
           }}>
-            Veuillez remplir le formulaire pour soumettre votre candidature
+            Complétez le formulaire ci-dessous pour postuler
           </p>
         </div>
 
         {/* Formulaire */}
         <div style={{
-          background: 'linear-gradient(135deg, #1a1a1a 0%, #000 100%)',
-          border: '2px solid #d4af37',
-          borderRadius: '30px',
-          padding: '50px',
-          boxShadow: '0 30px 80px rgba(212, 175, 55, 0.2)'
+          background: 'rgba(20, 20, 20, 0.6)',
+          backdropFilter: 'blur(10px)',
+          border: '1px solid rgba(201, 169, 97, 0.2)',
+          borderRadius: '20px',
+          padding: '60px 50px',
+          boxShadow: '0 20px 60px rgba(0, 0, 0, 0.5)'
         }}>
           <form onSubmit={handleSubmit}>
             
             {/* Section 1: Coordonnées */}
-            <div style={{ marginBottom: '50px' }}>
+            <div style={{ marginBottom: '60px' }}>
               <h3 style={{
-                fontSize: '24px',
-                color: '#d4af37',
-                marginBottom: '30px',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '15px',
-                fontWeight: 'bold'
+                fontSize: '14px',
+                color: '#c9a961',
+                marginBottom: '35px',
+                fontWeight: '500',
+                letterSpacing: '2px',
+                textTransform: 'uppercase'
               }}>
-                <span style={{
-                  width: '40px',
-                  height: '40px',
-                  background: '#d4af37',
-                  color: '#000',
-                  borderRadius: '50%',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  fontWeight: 'bold'
-                }}>1</span>
-                Vos Coordonnées
+                Informations Personnelles
               </h3>
               
               <div style={{
                 display: 'grid',
                 gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-                gap: '25px'
+                gap: '40px'
               }}>
-                <input
-                  type="text"
-                  name="nom"
-                  value={formData.nom}
-                  onChange={handleInputChange}
-                  required
-                  placeholder="Nom *"
-                  style={{
-                    width: '100%',
-                    padding: '15px 20px',
-                    background: '#000',
-                    border: '2px solid rgba(212, 175, 55, 0.3)',
-                    borderRadius: '12px',
-                    color: '#fff',
-                    fontSize: '16px',
-                    outline: 'none',
-                    transition: 'all 0.3s'
-                  }}
-                />
+                <div style={{ position: 'relative' }}>
+                  <input
+                    type="text"
+                    name="nom"
+                    value={formData.nom}
+                    onChange={handleInputChange}
+                    required
+                    placeholder="Nom *"
+                    style={{
+                      width: '100%',
+                      padding: '12px 0',
+                      background: 'transparent',
+                      border: 'none',
+                      borderBottom: '1px solid rgba(201, 169, 97, 0.3)',
+                      color: '#fff',
+                      fontSize: '16px',
+                      outline: 'none',
+                      transition: 'all 0.3s'
+                    }}
+                    onFocus={(e) => e.target.style.borderBottomColor = '#c9a961'}
+                    onBlur={(e) => e.target.style.borderBottomColor = 'rgba(201, 169, 97, 0.3)'}
+                  />
+                </div>
                 
-                <input
-                  type="text"
-                  name="prenom"
-                  value={formData.prenom}
-                  onChange={handleInputChange}
-                  required
-                  placeholder="Prénom *"
-                  style={{
-                    width: '100%',
-                    padding: '15px 20px',
-                    background: '#000',
-                    border: '2px solid rgba(212, 175, 55, 0.3)',
-                    borderRadius: '12px',
-                    color: '#fff',
-                    fontSize: '16px',
-                    outline: 'none'
-                  }}
-                />
+                <div style={{ position: 'relative' }}>
+                  <input
+                    type="text"
+                    name="prenom"
+                    value={formData.prenom}
+                    onChange={handleInputChange}
+                    required
+                    placeholder="Prénom *"
+                    style={{
+                      width: '100%',
+                      padding: '12px 0',
+                      background: 'transparent',
+                      border: 'none',
+                      borderBottom: '1px solid rgba(201, 169, 97, 0.3)',
+                      color: '#fff',
+                      fontSize: '16px',
+                      outline: 'none',
+                      transition: 'all 0.3s'
+                    }}
+                    onFocus={(e) => e.target.style.borderBottomColor = '#c9a961'}
+                    onBlur={(e) => e.target.style.borderBottomColor = 'rgba(201, 169, 97, 0.3)'}
+                  />
+                </div>
                 
-                <input
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  required
-                  placeholder="Email *"
-                  style={{
-                    width: '100%',
-                    padding: '15px 20px',
-                    background: '#000',
-                    border: '2px solid rgba(212, 175, 55, 0.3)',
-                    borderRadius: '12px',
-                    color: '#fff',
-                    fontSize: '16px',
-                    outline: 'none'
-                  }}
-                />
+                <div style={{ position: 'relative' }}>
+                  <input
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    required
+                    placeholder="Email *"
+                    style={{
+                      width: '100%',
+                      padding: '12px 0',
+                      background: 'transparent',
+                      border: 'none',
+                      borderBottom: '1px solid rgba(201, 169, 97, 0.3)',
+                      color: '#fff',
+                      fontSize: '16px',
+                      outline: 'none',
+                      transition: 'all 0.3s'
+                    }}
+                    onFocus={(e) => e.target.style.borderBottomColor = '#c9a961'}
+                    onBlur={(e) => e.target.style.borderBottomColor = 'rgba(201, 169, 97, 0.3)'}
+                  />
+                </div>
                 
-                <input
-                  type="tel"
-                  name="telephone"
-                  value={formData.telephone}
-                  onChange={handleInputChange}
-                  required
-                  placeholder="Téléphone *"
-                  style={{
-                    width: '100%',
-                    padding: '15px 20px',
-                    background: '#000',
-                    border: '2px solid rgba(212, 175, 55, 0.3)',
-                    borderRadius: '12px',
-                    color: '#fff',
-                    fontSize: '16px',
-                    outline: 'none'
-                  }}
-                />
+                <div style={{ position: 'relative' }}>
+                  <input
+                    type="tel"
+                    name="telephone"
+                    value={formData.telephone}
+                    onChange={handleInputChange}
+                    required
+                    placeholder="Téléphone *"
+                    style={{
+                      width: '100%',
+                      padding: '12px 0',
+                      background: 'transparent',
+                      border: 'none',
+                      borderBottom: '1px solid rgba(201, 169, 97, 0.3)',
+                      color: '#fff',
+                      fontSize: '16px',
+                      outline: 'none',
+                      transition: 'all 0.3s'
+                    }}
+                    onFocus={(e) => e.target.style.borderBottomColor = '#c9a961'}
+                    onBlur={(e) => e.target.style.borderBottomColor = 'rgba(201, 169, 97, 0.3)'}
+                  />
+                </div>
               </div>
             </div>
 
             {/* Section 2: Poste & Documents */}
-            <div style={{ marginBottom: '50px' }}>
+            <div style={{ marginBottom: '60px' }}>
               <h3 style={{
-                fontSize: '24px',
-                color: '#d4af37',
-                marginBottom: '30px',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '15px',
-                fontWeight: 'bold'
+                fontSize: '14px',
+                color: '#c9a961',
+                marginBottom: '35px',
+                fontWeight: '500',
+                letterSpacing: '2px',
+                textTransform: 'uppercase'
               }}>
-                <span style={{
-                  width: '40px',
-                  height: '40px',
-                  background: '#d4af37',
-                  color: '#000',
-                  borderRadius: '50%',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center'
-                }}>2</span>
-                Poste & Documents
+                Candidature
               </h3>
               
-              <div style={{ marginBottom: '25px' }}>
+              <div style={{ marginBottom: '40px' }}>
                 <select
                   name="poste"
                   value={formData.poste}
@@ -289,17 +279,23 @@ export default function RecruitmentForm() {
                   required
                   style={{
                     width: '100%',
-                    padding: '15px 20px',
-                    background: '#000',
-                    border: '2px solid rgba(212, 175, 55, 0.3)',
-                    borderRadius: '12px',
+                    padding: '12px 0',
+                    background: 'transparent',
+                    border: 'none',
+                    borderBottom: '1px solid rgba(201, 169, 97, 0.3)',
                     color: formData.poste ? '#fff' : '#666',
                     fontSize: '16px',
                     outline: 'none',
-                    cursor: 'pointer'
+                    cursor: 'pointer',
+                    appearance: 'none',
+                    backgroundImage: 'url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'12\' height=\'12\' viewBox=\'0 0 12 12\'%3E%3Cpath fill=\'%23c9a961\' d=\'M6 9L1 4h10z\'/%3E%3C/svg%3E")',
+                    backgroundRepeat: 'no-repeat',
+                    backgroundPosition: 'right center'
                   }}
+                  onFocus={(e) => e.target.style.borderBottomColor = '#c9a961'}
+                  onBlur={(e) => e.target.style.borderBottomColor = 'rgba(201, 169, 97, 0.3)'}
                 >
-                  <option value="">Choisissez le poste visé... *</option>
+                  <option value="">Sélectionnez le poste *</option>
                   <option value="Coiffeur">Coiffeur / Coiffeuse</option>
                   <option value="Prothese Ongulaire">Prothésiste Ongulaire</option>
                   <option value="Estheticienne">Esthéticienne</option>
@@ -308,14 +304,6 @@ export default function RecruitmentForm() {
               </div>
               
               <div>
-                <label style={{
-                  display: 'block',
-                  color: '#d4af37',
-                  fontWeight: '600',
-                  marginBottom: '10px'
-                }}>
-                  Joindre votre CV (PDF/DOCX, Max 5MB) *
-                </label>
                 <input
                   type="file"
                   onChange={handleFileChange}
@@ -327,49 +315,54 @@ export default function RecruitmentForm() {
                 <label
                   htmlFor="cv-upload"
                   style={{
-                    display: 'flex',
+                    display: 'inline-flex',
                     alignItems: 'center',
-                    justifyContent: 'center',
                     gap: '12px',
-                    width: '100%',
-                    padding: '18px 30px',
-                    background: 'linear-gradient(135deg, #d4af37, #f4e04d)',
-                    color: '#000',
-                    borderRadius: '12px',
+                    padding: '14px 32px',
+                    background: 'transparent',
+                    border: '1px solid rgba(201, 169, 97, 0.5)',
+                    color: '#c9a961',
+                    borderRadius: '4px',
                     cursor: 'pointer',
-                    fontWeight: 'bold',
-                    border: 'none',
-                    boxShadow: '0 10px 30px rgba(212, 175, 55, 0.3)',
-                    transition: 'all 0.3s'
+                    fontWeight: '400',
+                    fontSize: '15px',
+                    letterSpacing: '1px',
+                    transition: 'all 0.3s',
+                    textTransform: 'uppercase'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = 'rgba(201, 169, 97, 0.1)';
+                    e.currentTarget.style.borderColor = '#c9a961';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = 'transparent';
+                    e.currentTarget.style.borderColor = 'rgba(201, 169, 97, 0.5)';
                   }}
                 >
-                  📤 {cvFile ? cvFile.name : 'Choisir un fichier'}
+                  <span style={{ fontSize: '18px' }}>📎</span>
+                  {cvFile ? cvFile.name : 'Joindre votre CV'}
                 </label>
+                <div style={{
+                  marginTop: '10px',
+                  fontSize: '13px',
+                  color: '#666'
+                }}>
+                  PDF, DOC, DOCX - Maximum 5MB
+                </div>
               </div>
             </div>
 
             {/* Section 3: Message */}
-            <div style={{ marginBottom: '50px' }}>
+            <div style={{ marginBottom: '60px' }}>
               <h3 style={{
-                fontSize: '24px',
-                color: '#d4af37',
-                marginBottom: '30px',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '15px',
-                fontWeight: 'bold'
+                fontSize: '14px',
+                color: '#c9a961',
+                marginBottom: '35px',
+                fontWeight: '500',
+                letterSpacing: '2px',
+                textTransform: 'uppercase'
               }}>
-                <span style={{
-                  width: '40px',
-                  height: '40px',
-                  background: '#d4af37',
-                  color: '#000',
-                  borderRadius: '50%',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center'
-                }}>3</span>
-                Message
+                Message de Motivation
               </h3>
               
               <textarea
@@ -377,105 +370,113 @@ export default function RecruitmentForm() {
                 value={formData.message}
                 onChange={handleInputChange}
                 rows="5"
-                placeholder="Lettre de motivation / Détails (Optionnel)"
+                placeholder="Parlez-nous de vous et de vos motivations... (Optionnel)"
                 style={{
                   width: '100%',
-                  padding: '15px 20px',
-                  background: '#000',
-                  border: '2px solid rgba(212, 175, 55, 0.3)',
-                  borderRadius: '12px',
+                  padding: '15px',
+                  background: 'rgba(0, 0, 0, 0.3)',
+                  border: '1px solid rgba(201, 169, 97, 0.3)',
+                  borderRadius: '8px',
                   color: '#fff',
-                  fontSize: '16px',
+                  fontSize: '15px',
                   outline: 'none',
-                  resize: 'vertical'
+                  resize: 'vertical',
+                  lineHeight: '1.6',
+                  fontFamily: 'inherit',
+                  transition: 'all 0.3s'
                 }}
+                onFocus={(e) => e.target.style.borderColor = '#c9a961'}
+                onBlur={(e) => e.target.style.borderColor = 'rgba(201, 169, 97, 0.3)'}
               />
             </div>
 
             {/* Section 4: Localisation */}
-            <div style={{ marginBottom: '50px' }}>
+            <div style={{ marginBottom: '60px' }}>
               <h3 style={{
-                fontSize: '24px',
-                color: '#d4af37',
-                marginBottom: '30px',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '15px',
-                fontWeight: 'bold'
+                fontSize: '14px',
+                color: '#c9a961',
+                marginBottom: '35px',
+                fontWeight: '500',
+                letterSpacing: '2px',
+                textTransform: 'uppercase'
               }}>
-                <span style={{
-                  width: '40px',
-                  height: '40px',
-                  background: '#d4af37',
-                  color: '#000',
-                  borderRadius: '50%',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center'
-                }}>4</span>
-                Votre Localisation
+                Localisation
               </h3>
               
               <div style={{
                 display: 'grid',
                 gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-                gap: '25px'
+                gap: '40px'
               }}>
-                <input
-                  type="text"
-                  name="ville"
-                  value={formData.ville}
-                  onChange={handleInputChange}
-                  required
-                  placeholder="Ville *"
-                  style={{
-                    width: '100%',
-                    padding: '15px 20px',
-                    background: '#000',
-                    border: '2px solid rgba(212, 175, 55, 0.3)',
-                    borderRadius: '12px',
-                    color: '#fff',
-                    fontSize: '16px',
-                    outline: 'none'
-                  }}
-                />
+                <div style={{ position: 'relative' }}>
+                  <input
+                    type="text"
+                    name="ville"
+                    value={formData.ville}
+                    onChange={handleInputChange}
+                    required
+                    placeholder="Ville *"
+                    style={{
+                      width: '100%',
+                      padding: '12px 0',
+                      background: 'transparent',
+                      border: 'none',
+                      borderBottom: '1px solid rgba(201, 169, 97, 0.3)',
+                      color: '#fff',
+                      fontSize: '16px',
+                      outline: 'none',
+                      transition: 'all 0.3s'
+                    }}
+                    onFocus={(e) => e.target.style.borderBottomColor = '#c9a961'}
+                    onBlur={(e) => e.target.style.borderBottomColor = 'rgba(201, 169, 97, 0.3)'}
+                  />
+                </div>
                 
-                <input
-                  type="text"
-                  name="quartier"
-                  value={formData.quartier}
-                  onChange={handleInputChange}
-                  placeholder="Quartier"
-                  style={{
-                    width: '100%',
-                    padding: '15px 20px',
-                    background: '#000',
-                    border: '2px solid rgba(212, 175, 55, 0.3)',
-                    borderRadius: '12px',
-                    color: '#fff',
-                    fontSize: '16px',
-                    outline: 'none'
-                  }}
-                />
+                <div style={{ position: 'relative' }}>
+                  <input
+                    type="text"
+                    name="quartier"
+                    value={formData.quartier}
+                    onChange={handleInputChange}
+                    placeholder="Quartier"
+                    style={{
+                      width: '100%',
+                      padding: '12px 0',
+                      background: 'transparent',
+                      border: 'none',
+                      borderBottom: '1px solid rgba(201, 169, 97, 0.3)',
+                      color: '#fff',
+                      fontSize: '16px',
+                      outline: 'none',
+                      transition: 'all 0.3s'
+                    }}
+                    onFocus={(e) => e.target.style.borderBottomColor = '#c9a961'}
+                    onBlur={(e) => e.target.style.borderBottomColor = 'rgba(201, 169, 97, 0.3)'}
+                  />
+                </div>
               </div>
             </div>
 
             {/* Message de statut */}
             {status.message && (
               <div style={{
-                padding: '18px',
-                borderRadius: '12px',
-                marginBottom: '25px',
+                padding: '18px 24px',
+                borderRadius: '8px',
+                marginBottom: '30px',
                 display: 'flex',
                 alignItems: 'center',
                 gap: '12px',
                 background: status.type === 'success' 
-                  ? 'rgba(34, 197, 94, 0.2)' 
-                  : 'rgba(239, 68, 68, 0.2)',
-                border: `2px solid ${status.type === 'success' ? '#22c55e' : '#ef4444'}`,
-                color: status.type === 'success' ? '#4ade80' : '#f87171'
+                  ? 'rgba(34, 197, 94, 0.15)' 
+                  : 'rgba(239, 68, 68, 0.15)',
+                border: `1px solid ${status.type === 'success' ? 'rgba(34, 197, 94, 0.3)' : 'rgba(239, 68, 68, 0.3)'}`,
+                color: status.type === 'success' ? '#4ade80' : '#f87171',
+                fontSize: '15px'
               }}>
-                {status.type === 'success' ? '✓' : '⚠'} {status.message}
+                <span style={{ fontSize: '20px' }}>
+                  {status.type === 'success' ? '✓' : '⚠'}
+                </span>
+                {status.message}
               </div>
             )}
 
@@ -485,30 +486,44 @@ export default function RecruitmentForm() {
               disabled={isSubmitting}
               style={{
                 width: '100%',
-                padding: '20px',
+                padding: '18px',
                 background: isSubmitting 
-                  ? '#666' 
-                  : 'linear-gradient(135deg, #d4af37, #f4e04d)',
-                color: '#000',
-                border: 'none',
-                borderRadius: '15px',
-                fontSize: '20px',
-                fontWeight: 'bold',
+                  ? 'rgba(100, 100, 100, 0.3)' 
+                  : 'linear-gradient(135deg, rgba(201, 169, 97, 0.2), rgba(201, 169, 97, 0.1))',
+                border: '1px solid #c9a961',
+                color: '#c9a961',
+                borderRadius: '8px',
+                fontSize: '15px',
+                fontWeight: '500',
+                letterSpacing: '2px',
+                textTransform: 'uppercase',
                 cursor: isSubmitting ? 'not-allowed' : 'pointer',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 gap: '12px',
-                boxShadow: '0 15px 50px rgba(212, 175, 55, 0.4)',
-                transition: 'all 0.3s'
+                transition: 'all 0.3s',
+                opacity: isSubmitting ? 0.6 : 1
+              }}
+              onMouseEnter={(e) => {
+                if (!isSubmitting) {
+                  e.currentTarget.style.background = 'rgba(201, 169, 97, 0.2)';
+                  e.currentTarget.style.transform = 'translateY(-2px)';
+                }
+              }}
+              onMouseLeave={(e) => {
+                if (!isSubmitting) {
+                  e.currentTarget.style.background = 'linear-gradient(135deg, rgba(201, 169, 97, 0.2), rgba(201, 169, 97, 0.1))';
+                  e.currentTarget.style.transform = 'translateY(0)';
+                }
               }}
             >
               {isSubmitting ? (
                 <>
                   <div style={{
-                    width: '24px',
-                    height: '24px',
-                    border: '3px solid #000',
+                    width: '18px',
+                    height: '18px',
+                    border: '2px solid #c9a961',
                     borderTopColor: 'transparent',
                     borderRadius: '50%',
                     animation: 'spin 0.8s linear infinite'
@@ -517,7 +532,8 @@ export default function RecruitmentForm() {
                 </>
               ) : (
                 <>
-                  ✉️ Envoyer ma Candidature
+                  <span style={{ fontSize: '18px' }}>✉</span>
+                  Envoyer ma Candidature
                 </>
               )}
             </button>
@@ -527,11 +543,18 @@ export default function RecruitmentForm() {
         {/* Footer */}
         <div style={{
           textAlign: 'center',
-          marginTop: '40px',
-          color: '#666',
-          fontSize: '14px'
+          marginTop: '50px',
+          color: '#555',
+          fontSize: '13px',
+          letterSpacing: '1px'
         }}>
-          © 2025 Sunshine Beauty & Spa - Tous droits réservés
+          <div style={{
+            width: '40px',
+            height: '1px',
+            background: 'rgba(201, 169, 97, 0.3)',
+            margin: '0 auto 20px'
+          }} />
+          © 2025 Sunshine Beauty & Spa
         </div>
       </div>
 
@@ -540,14 +563,13 @@ export default function RecruitmentForm() {
           to { transform: rotate(360deg); }
         }
         
-        input:focus, select:focus, textarea:focus {
-          border-color: #d4af37 !important;
-          box-shadow: 0 0 20px rgba(212, 175, 55, 0.3) !important;
+        ::placeholder {
+          color: #666;
         }
         
-        button:not(:disabled):hover {
-          transform: translateY(-3px);
-          box-shadow: 0 20px 60px rgba(212, 175, 55, 0.6) !important;
+        select option {
+          background: #1a1a1a;
+          color: #fff;
         }
       `}</style>
     </div>
