@@ -1,7 +1,21 @@
-import { sql } from '@vercel/postgres';
+import { createPool } from '@vercel/postgres';
 import { put } from '@vercel/blob';
 import { Resend } from 'resend';
 import { NextResponse } from 'next/server';
+
+// Créer la connexion avec fallback sur DATABASE_URL
+const connectionString = process.env.POSTGRES_URL || process.env.DATABASE_URL;
+
+if (!connectionString) {
+  console.error('AUCUNE VARIABLE DE CONNEXION TROUVÉE !');
+  console.error('Variables disponibles:', Object.keys(process.env).filter(k => k.includes('POSTGRES') || k.includes('DATABASE')));
+}
+
+const pool = createPool({
+  connectionString: connectionString,
+});
+
+const sql = pool.sql;
 
 // Initialiser Resend seulement si la clé existe
 let resend = null;
@@ -14,7 +28,7 @@ export async function POST(request) {
   
   try {
     const formData = await request.formData();
-    console.log('📝 FormData reçu');
+    console.log('FormData reçu');
     
     // Récupération des données
     const nom = formData.get('nom');
@@ -41,14 +55,14 @@ export async function POST(request) {
     // Upload du CV vers Vercel Blob
     let cvUrl = null;
     try {
-      console.log('📤 Upload du CV...');
+      console.log('Upload du CV...');
       const blob = await put(`cv/${Date.now()}-${cvFile.name}`, cvFile, {
         access: 'public',
       });
       cvUrl = blob.url;
       console.log('CV uploadé:', cvUrl);
     } catch (error) {
-      console.error(' Erreur upload CV:', error);
+      console.error('Erreur upload CV:', error);
       return NextResponse.json(
         { error: 'Erreur lors du téléchargement du CV: ' + error.message },
         { status: 500 }
@@ -82,15 +96,15 @@ export async function POST(request) {
     if (resend) {
       // Email au recruteur
       try {
-        console.log('Envoi email recruteur...');
+        console.log(' Envoi email recruteur...');
         await resend.emails.send({
           from: 'onboarding@resend.dev',
-          to: 'wesleydefanseu@gmail.com', // CHANGEZ CECI !
+          to: 'spasunshine7@gmail.com', // CHANGEZ CECI !
           subject: `Nouvelle candidature : ${poste} - ${prenom} ${nom}`,
           html: `
             <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #f5f5f5;">
               <div style="background: linear-gradient(135deg, #d4af37, #f4e04d); padding: 40px; text-align: center;">
-                <h1 style="color: #000; margin: 0; font-size: 32px;">Nouvelle Candidature Reçue</h1>
+                <h1 style="color: #000; margin: 0; font-size: 32px;">✨ Nouvelle Candidature Reçue</h1>
               </div>
               
               <div style="padding: 40px; background: white;">
@@ -147,7 +161,7 @@ export async function POST(request) {
                             font-weight: bold;
                             font-size: 16px;
                             box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);">
-                    📄 Télécharger le CV
+                    Télécharger le CV
                   </a>
                 </div>
               </div>
@@ -160,7 +174,7 @@ export async function POST(request) {
         });
         console.log('Email recruteur envoyé');
       } catch (error) {
-        console.error(' Erreur envoi email recruteur:', error.message);
+        console.error('Erreur envoi email recruteur:', error.message);
         // On continue même si l'email échoue
       }
 
@@ -209,15 +223,15 @@ export async function POST(request) {
             </div>
           `,
         });
-        console.log('Email candidat envoyé');
+        console.log('✅ Email candidat envoyé');
       } catch (error) {
-        console.error('Erreur envoi email candidat:', error.message);
+        console.error('⚠️ Erreur envoi email candidat:', error.message);
       }
     } else {
-      console.log('Resend non configuré, emails non envoyés');
+      console.log('⚠️ Resend non configuré, emails non envoyés');
     }
 
-    console.log(' Traitement terminé avec succès');
+    console.log('🎉 Traitement terminé avec succès');
     return NextResponse.json({ 
       success: true,
       message: 'Candidature envoyée avec succès' 
