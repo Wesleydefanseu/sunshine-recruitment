@@ -166,13 +166,66 @@ export async function POST(request) {
       }
 
       // Email de confirmation au candidat
-      try {
-        console.log('Envoi email candidat...');
-        await resend.emails.send({
-          from: 'onboarding@resend.dev',
-          to: email,
-          subject: 'Confirmation de réception de votre candidature - Sunshine Beauty & Spa',
-          html: `
+    //   try {
+    //     console.log('Envoi email candidat...');
+    //     await resend.emails.send({
+    //       from: 'onboarding@resend.dev',
+    //       to: email,
+    //       subject: 'Confirmation de réception de votre candidature - Sunshine Beauty & Spa',
+    //       html: `
+    //         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #f5f5f5;">
+    //           <div style="background: linear-gradient(135deg, #d4af37, #f4e04d); padding: 40px; text-align: center;">
+    //             <h1 style="color: #000; margin: 0; font-size: 36px;">Merci ${prenom} !</h1>
+    //           </div>
+              
+    //           <div style="padding: 40px; background: white;">
+    //             <p style="font-size: 18px; color: #333; margin-bottom: 20px;">
+    //               Bonjour <strong>${prenom} ${nom}</strong>,
+    //             </p>
+                
+    //             <p style="font-size: 16px; color: #666; line-height: 1.8; margin-bottom: 25px;">
+    //               Nous avons bien reçu votre candidature pour le poste de <strong style="color: #d4af37;">${poste}</strong>.
+    //             </p>
+                
+    //             <div style="background: #f9f9f9; padding: 25px; border-left: 4px solid #d4af37; margin: 30px 0;">
+    //               <p style="margin: 0; color: #666; line-height: 1.8;">
+    //                 Notre équipe va examiner votre profil avec attention. 
+    //                 Si votre profil correspond à nos besoins, nous vous recontacterons dans les meilleurs délais.
+    //               </p>
+    //             </div>
+                
+    //             <p style="font-size: 16px; color: #666; margin-top: 30px;">
+    //               Nous vous remercions pour l'intérêt que vous portez à Sunshine Beauty & Spa.
+    //             </p>
+                
+    //             <p style="margin-top: 40px; color: #666;">Cordialement,</p>
+    //             <p style="color: #d4af37; font-weight: bold; font-size: 18px; margin: 5px 0;">
+    //               L'équipe Sunshine Beauty & Spa
+    //             </p>
+    //           </div>
+              
+    //           <div style="padding: 30px; text-align: center; background: #1a1a1a; color: #999;">
+    //             <p style="margin: 0; font-size: 14px;">© 2025 Sunshine Beauty & Spa</p>
+    //           </div>
+    //         </div>
+    //       `,
+    //     });
+    //     console.log('Email candidat envoyé avec succès ! ID:', emailResult2.id);
+    //   } catch (error) {
+    //     console.error('Erreur envoi email candidat:', error);
+    //     console.error('Code erreur:', error.statusCode);
+    //     console.error('Message:', error.message);
+    //   }
+
+    try {
+  console.log('Envoi email candidat...');
+  
+  // 🚀 CORRECTION : Assigner le résultat à la variable emailResult2
+  const emailResult2 = await resend.emails.send({
+    from: 'onboarding@resend.dev',
+    to: email,
+    subject: 'Confirmation de réception de votre candidature - Sunshine Beauty & Spa',
+    html: `
             <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #f5f5f5;">
               <div style="background: linear-gradient(135deg, #d4af37, #f4e04d); padding: 40px; text-align: center;">
                 <h1 style="color: #000; margin: 0; font-size: 36px;">Merci ${prenom} !</h1>
@@ -208,14 +261,16 @@ export async function POST(request) {
                 <p style="margin: 0; font-size: 14px;">© 2025 Sunshine Beauty & Spa</p>
               </div>
             </div>
-          `,
-        });
-        console.log('Email candidat envoyé avec succès ! ID:', emailResult2.id);
-      } catch (error) {
-        console.error('Erreur envoi email candidat:', error);
-        console.error('Code erreur:', error.statusCode);
-        console.error('Message:', error.message);
-      }
+          `, // Votre contenu HTML
+  });
+  
+  // Cette ligne fonctionne maintenant car emailResult2 est défini
+  console.log('Email candidat envoyé avec succès ! ID:', emailResult2.id);
+} catch (error) {
+  console.error('Erreur envoi email candidat:', error);
+  console.error('Code erreur:', error.statusCode);
+  console.error('Message:', error.message);
+}
     } else {
       console.log('Resend NON configuré - Variable RESEND_API_KEY manquante !');
       console.log('Les emails ne seront pas envoyés.');
