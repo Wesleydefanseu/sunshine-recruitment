@@ -99,7 +99,7 @@ export async function POST(request) {
         console.log(' Envoi email recruteur...');
         await resend.emails.send({
           from: 'onboarding@resend.dev',
-          to: 'spasunshine7@gmail.com', // CHANGEZ CECI !
+          to: 'wesleydefanseu@gmail.com', // CHANGEZ CECI !
           subject: `Nouvelle candidature : ${poste} - ${prenom} ${nom}`,
           html: `
             <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #f5f5f5;">
