@@ -85,17 +85,17 @@ export async function POST(request) {
         console.log('Envoi email recruteur...');
         await resend.emails.send({
           from: 'onboarding@resend.dev',
-          to: 'votre-email@example.com', // CHANGEZ CECI !
+          to: 'wesleydefanseu@gmail.com', // CHANGEZ CECI !
           subject: `Nouvelle candidature : ${poste} - ${prenom} ${nom}`,
           html: `
             <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #f5f5f5;">
               <div style="background: linear-gradient(135deg, #d4af37, #f4e04d); padding: 40px; text-align: center;">
-                <h1 style="color: #000; margin: 0; font-size: 32px;">✨ Nouvelle Candidature Reçue</h1>
+                <h1 style="color: #000; margin: 0; font-size: 32px;">Nouvelle Candidature Reçue</h1>
               </div>
               
               <div style="padding: 40px; background: white;">
                 <h2 style="color: #d4af37; border-bottom: 3px solid #d4af37; padding-bottom: 10px; margin-bottom: 25px;">
-                  📋 Informations du Candidat
+                  Informations du Candidat
                 </h2>
                 
                 <table style="width: 100%; border-collapse: collapse;">
@@ -129,7 +129,7 @@ export async function POST(request) {
                 
                 ${message ? `
                   <h3 style="color: #d4af37; margin-top: 30px; margin-bottom: 15px;">
-                    💬 Message / Motivation
+                    Message / Motivation
                   </h3>
                   <div style="background: #f9f9f9; padding: 20px; border-left: 4px solid #d4af37; line-height: 1.6;">
                     ${message.replace(/\n/g, '<br>')}
