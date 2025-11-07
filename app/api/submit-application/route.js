@@ -85,7 +85,7 @@ export async function POST(request) {
         console.log('Envoi email recruteur...');
         const emailResult = await resend.emails.send({
           from: 'onboarding@resend.dev', // Changez par votre domaine si vérifié
-          to: 'spasunshine7@gmail.com ', // ⚠️ CHANGEZ CECI !
+          to: 'spasunshine7@gmail.com', // ⚠️ CHANGEZ CECI !
           subject: `Nouvelle candidature : ${poste} - ${prenom} ${nom}`,
           html: `
             <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #f5f5f5;">
